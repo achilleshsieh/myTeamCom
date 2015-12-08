@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60562C01C115BA1000BA5D8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60562BF1C115BA1000BA5D8 /* User.swift */; };
+		C60562C21C153FAA000BA5D8 /* ProfileSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60562C11C153FAA000BA5D8 /* ProfileSetting.swift */; };
 		C60FD3AE1C041E8000BA1FD4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C60FD3AD1C041E8000BA1FD4 /* logo.png */; };
 		C60FD3B31C042E5F00BA1FD4 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60FD3B21C042E5F00BA1FD4 /* MaterialView.swift */; };
 		C60FD3B81C042EE300BA1FD4 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C60FD3B41C042EE300BA1FD4 /* NotoSans-Bold.ttf */; };
@@ -55,6 +57,8 @@
 		0649DD5A90728B815AB22895 /* Pods-myTeamCom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myTeamCom.release.xcconfig"; path = "Pods/Target Support Files/Pods-myTeamCom/Pods-myTeamCom.release.xcconfig"; sourceTree = "<group>"; };
 		2358F96497917D755ABE1C4A /* Pods_myTeamCom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myTeamCom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		431182B8268120208C9D65E2 /* Pods-myTeamCom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myTeamCom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myTeamCom/Pods-myTeamCom.debug.xcconfig"; sourceTree = "<group>"; };
+		C60562BF1C115BA1000BA5D8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C60562C11C153FAA000BA5D8 /* ProfileSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSetting.swift; sourceTree = "<group>"; };
 		C60FD3AD1C041E8000BA1FD4 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		C60FD3B21C042E5F00BA1FD4 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		C60FD3B41C042EE300BA1FD4 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 			children = (
 				C69EFD331C04143200F07AC8 /* ViewController.swift */,
 				C67975681C0A230F00135EE1 /* FeedVC.swift */,
+				C60562C11C153FAA000BA5D8 /* ProfileSetting.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				C65BA2D21C0ABA8800DBE38A /* Post.swift */,
+				C60562BF1C115BA1000BA5D8 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -456,7 +462,9 @@
 				C60FD3C21C0439BD00BA1FD4 /* MaterialButton.swift in Sources */,
 				C69EFD3A1C04143200F07AC8 /* myTeamCom.xcdatamodeld in Sources */,
 				C69EFD321C04143200F07AC8 /* AppDelegate.swift in Sources */,
+				C60562C21C153FAA000BA5D8 /* ProfileSetting.swift in Sources */,
 				C60FD3B31C042E5F00BA1FD4 /* MaterialView.swift in Sources */,
+				C60562C01C115BA1000BA5D8 /* User.swift in Sources */,
 				C60FD3C41C043F5800BA1FD4 /* MaterialTextField.swift in Sources */,
 				C67975671C0652C700135EE1 /* DataService.swift in Sources */,
 				C679756B1C0A24BA00135EE1 /* PostCell.swift in Sources */,

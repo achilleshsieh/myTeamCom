@@ -61,6 +61,7 @@ class ViewController: UIViewController {
                         DataService.ds.createFirebaseUser(authData.uid, user: user)
                         
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                    
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     }
                 })
@@ -83,7 +84,7 @@ class ViewController: UIViewController {
                                 if errCreateUser != nil {
                                     self.showErrorAlert("Could not create account", msg: "Try something different")
                                 } else {
-                                    // get user information
+                                    // Option1 to get user UID information
                                     NSUserDefaults.standardUserDefaults().setValue(resultCreateUser[KEY_UID], forKey: KEY_UID)
                                     // log into the app using information passed from OAuth
                                     DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { errorLogIn, resultLogIn in
@@ -93,8 +94,11 @@ class ViewController: UIViewController {
                                         // it is better to do the "if let" statement. But it will require error handler etc.
                                         // to keep it simple, we used "!" instead.
                                         
+                                        // Option2 to get user UID information
+                                        // NSUserDefaults.standardUserDefaults().setValue(resultLogIn.uid, forKey: KEY_UID)
                                         let user = ["provider": resultLogIn.provider!, "blah": "emailTest"]
                                         DataService.ds.createFirebaseUser(resultLogIn.uid, user: user)
+                                        
                                     })
                                     
                                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
@@ -108,6 +112,8 @@ class ViewController: UIViewController {
                     } else {
                         // if there is no error, that means the user name and password are correct
                         // then directly sign the guy in
+                        NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                        
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     }
                     

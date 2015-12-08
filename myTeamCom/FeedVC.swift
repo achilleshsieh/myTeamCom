@@ -23,6 +23,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     var imagePicker: UIImagePickerController!
     
     //define image cache to determine if the image is already loaded
+    // this is to optimize the internet connection experience
+    // so the system is not constantly reloading image
+    // without this, everytime a table cell enters the screen, it will download the image, 
+    // even it just loaded. So if user is scrolling up and down, the system will be overloaded. 
     static var imageCache = NSCache()
 
     override func viewDidLoad() {
@@ -38,6 +42,16 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
+//        Trying to get user information for the post
+//        DataService.ds.REF_USERS.observeEventType(.Value, withBlock: { userSnap in
+//            if let users = userSnap.children.allObjects as? [FDataSnapshot] {
+//                for usr in users {
+//                    print("\(usr.userId)"
+//                }
+//            }
+//            })
+        
+        
         DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { snapshot in
             //print(snapshot.value)
             
@@ -52,6 +66,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                         self.posts.append(post)
                     }
                 }
+                self.posts.sortInPlace({ $0.postTimeStamp > $1.postTimeStamp })
                 
             }
             
@@ -142,6 +157,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                 let keyData = "049CMPSYc8f1d5c674bfa2feb8c3d99c7457c1e2".dataUsingEncoding(NSUTF8StringEncoding)!
                 let keyJSON = "json".dataUsingEncoding(NSUTF8StringEncoding)!
                 
+                // upload image to ImageShack using Alamofire
                 Alamofire.upload(.POST, url, multipartFormData: { multipartFormData in
                     
                     multipartFormData.appendBodyPart(data: imgData, name: "fileupload", fileName: "image", mimeType: "image/jpg")
@@ -178,9 +194,22 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     func postToFirebase(imgUrl: String?) {
         
+        // record current time and convert it to UTC time stamp string
+        let postingTime = NSDate()
+        let postingFormatter = NSDateFormatter()
+        postingFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        postingFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        let postingTimeStr = postingFormatter.stringFromDate(postingTime)
+        
+        // get current user information
+        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+        
+        // prepare post data
         var post: Dictionary<String, AnyObject> = [
             "description": postField.text!,
-            "likes": 0
+            "likes": 0,
+            "timeStamp": postingTimeStr,
+            "userId": uid
         ]
         if imgUrl != nil {
             post["imageUrl"] = imgUrl!
@@ -197,6 +226,17 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         tableView.reloadData()
     }
+    
+    @IBAction func settingPressed(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier(SEGUE_PROFILE, sender: nil)
+    }
+    
+    @IBAction func logOutPressed(sender: UIBarButtonItem) {
+        DataService.ds.REF_BASE.unauth()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

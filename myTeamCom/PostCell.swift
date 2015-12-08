@@ -2,6 +2,8 @@
 //  PostCell.swift
 //  myTeamCom
 //
+//  This is to define each cell in the table.
+//
 //  Created by aloha kids on 11/28/15.
 //  Copyright © 2015 Richard. All rights reserved.
 //
@@ -17,16 +19,19 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var descText: UITextView!
     @IBOutlet weak var likesLbl: UILabel!
     @IBOutlet weak var likesImg: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
     
     var post: Post!
     var request: Request?
     var likeRef: Firebase!
+    var usernameRef: Firebase!
+    var profileImgRef: Firebase!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        // program tap gesture for repeated view or table view
+        // this is the only way to program tap gesture for repeated view or table view
         // tap gesture cannot configured for any repeated view or table view
         let tap = UITapGestureRecognizer(target: self, action: "likeTapped:")
         tap.numberOfTapsRequired = 1
@@ -45,6 +50,32 @@ class PostCell: UITableViewCell {
         self.post = post
         
         likeRef = DataService.ds.REF_USER_CURRENT.childByAppendingPath("likes").childByAppendingPath(post.postKey)
+        
+        if post.userId != "" {
+            usernameRef = DataService.ds.REF_USERS.childByAppendingPath(post.userId).childByAppendingPath("username")
+            
+            usernameRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                if let usernameNotExist = snapshot.value as? NSNull {
+                    self.profileName.text = "Default"
+                } else {
+                    self.profileName.text = "\(snapshot.value)"
+                }
+                
+            })
+            
+            profileImgRef = DataService.ds.REF_USERS.childByAppendingPath(post.userId).childByAppendingPath("imageUrl")
+            
+            profileImgRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                if let profileImgNotExist = snapshot.value as? NSNull {
+                    // do nothing and use default image
+                } else {
+                    // use its image
+                }
+                
+            })
+        } else {
+            self.profileName.text = "Default"
+        }
         
         self.descText.text = post.postDescription
         self.likesLbl.text = "\(post.likes)"
@@ -105,11 +136,12 @@ class PostCell: UITableViewCell {
         })
         
     }
+    
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+//    override func setSelected(selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
 }

@@ -14,6 +14,7 @@ let KEY_UID = "uid"
 
 // Segue
 let SEGUE_LOGGED_IN = "loggedIn"
+let SEGUE_PROFILE = "profileSetting"
 
 
 // Status codes
