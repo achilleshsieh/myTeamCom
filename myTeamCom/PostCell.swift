@@ -70,6 +70,14 @@ class PostCell: UITableViewCell {
                     // do nothing and use default image
                 } else {
                     // use its image
+                    let profileImgUrl = "\(snapshot.value)"
+                    self.request = Alamofire.request(.GET, profileImgUrl).validate(contentType: ["image/*"]).response(completionHandler: { request, response, data, err in
+                        if err == nil {
+                            let img = UIImage(data: data!)!
+                            self.profileImg.image = img
+                            
+                        }
+                    })
                 }
                 
             })

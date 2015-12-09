@@ -33,12 +33,12 @@ class ProfileSetting: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         
         DataService.ds.REF_USER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            if let snap = snapshot.value.allObjects as? FDataSnapshot {
-                if let currentUserDict = snap.value as? Dictionary<String, AnyObject> {
+            //if let snap = snapshot.value.allObjects as? FDataSnapshot {
+                if let currentUserDict = snapshot.value as? Dictionary<String, AnyObject> {
                     let key = snapshot.key
                     self.currentUser = User(userKey: key, dict: currentUserDict)
                 }
-            }
+            //}
             
             if self.currentUser.userName == "" {
                 self.userNameField.text = ""

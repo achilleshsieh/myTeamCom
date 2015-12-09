@@ -506,6 +506,10 @@
                                         <rect key="frame" x="41" y="163" width="65" height="65"/>
                                         <animations/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="Cgv-DO-7cM"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="nrv-Qh-B24"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="PxM-iB-HHr" appends="YES" id="2Gp-R7-51Y"/>
                                         </connections>
@@ -576,14 +580,18 @@
         <!--Navigation Controller-->
         <scene sceneID="feM-ci-d3e">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bip-cf-hKs" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="bip-cf-hKs" colorLabel="IBBuiltInLabel-Orange" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TJe-ht-vPa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                         <color key="backgroundColor" red="0.1529411765" green="0.57647058819999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.1529411765" green="0.57647058819999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

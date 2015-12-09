@@ -34,6 +34,8 @@ class User {
 
         if let imgUrl = dict["imageUrl"] as? String {
             self._profileImgUrl = imgUrl
+        } else {
+            self._profileImgUrl = ""
         }
         if let usrName = dict["username"] as? String {
             self._userName = usrName
